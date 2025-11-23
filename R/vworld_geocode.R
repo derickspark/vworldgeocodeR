@@ -1,9 +1,33 @@
+#' Geocode addresses through vworld.kr
+#'
+#' Thin wrapper for vworld's address API that supports both parcel and road
+#' addresses, shows progress with ETA, and safely parses varied JSON shapes.
+#'
+#' @param address_vec Character vector of addresses (parcel or road).
+#' @param api_key Single API key string for vworld.
+#' @param type Address type, either `"PARCEL"` or `"ROAD"`.
+#' @param col_name Column name to use for the input address in the output data.frame.
+#' @param crs Coordinate reference system, default `"EPSG:4326"`.
+#' @param sleep_sec Seconds to sleep between requests (rate limiting), default `0.12`.
+#' @param progress Logical; print progress/ETA (default `TRUE`).
+#' @param verbose Logical; if `TRUE`, print per-request status and messages.
+#' @param timeout_sec HTTP timeout per request in seconds, default `10`.
+#' @param progress_label Optional label (e.g., `"res1"`/`"res2"`) shown in progress.
+#'
+#' @return A `data.frame` with columns: the input address (`col_name`), `lat`, `lon`.
+#' @examples
+#' \dontrun{
+#' api_key <- Sys.getenv("VWORLD_GEOCODING2")
+#' addresses <- c("서울특별시 중구 세종대로 110")
+#' vworld_geocode(addresses, api_key, type = "ROAD", progress_label = "demo")
+#' }
+#' @export
 vworld_geocode <- function(address_vec, api_key,
                            type = c("PARCEL", "ROAD"),
                            col_name = "address",
                            crs = "EPSG:4326",
                            sleep_sec = 0.12,
-                           progress = TRUE,
+                            progress = TRUE,
                            verbose = FALSE,
                            timeout_sec = 10,
                            progress_label = NULL) {
