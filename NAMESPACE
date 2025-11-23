@@ -1,2 +1,1 @@
 export(vworld_geocode)
-export(batch_geocode)
