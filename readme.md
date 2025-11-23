@@ -1,71 +1,35 @@
-# vworldgeocodeR
+# vworldGeocode
 
-VWorld 도로명 주소 지오코딩을 위한 간단 패키지입니다.
+간단한 vworld 주소 지오코딩 래퍼입니다. 도로명/지번 주소 모두 처리하며 진행률과 ETA를 표시합니다.
 
+## 설치
 ```r
-install.packages("Rcurl")  # Rcurl 패키지가 없으면 먼저 설치
-install.packages("remotes")  # remotes 패키지가 없으면 먼저 설치
-remotes::install_github("derickspark/vworldgeocodeR")
+# 개발 버전
+# remotes::install_github("your-id/vworldGeocode")
 ```
-** 중요!! **
-Rcurl 이 설치되어 있어야 합니다 !! 
-
-** 중요 !! ** 
-V-World API 키는 다음과 같이 발급받으실 수 있습니다. 
-1. V-World 개발자센터 (https://www.vworld.kr) 접속 후 회원가입 필수!! 
-2. V-world 상단 메뉴 중 `오픈API` → `인증키 발급`
-   (서비스유형은 `기타`, 활용API는 `2D 지도 API` 로 선택)
-4. 발급받은 인증키를 복사(CTRL+C) 하여 아래와 같이 코드로 붙여넣기
 
 ## 사용 예시 
- ```r
-library(vworldgeocodeR)
-api_key <- "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" #여기에_본인_API_KEY_입력
-```
----------------------------------------------
-### 주소 하나를 지오코딩하는 경우
 ```r
-result <- vworld_geocode(
-  address = "서울특별시 중구 세종대로 110",
-  api_key
-)
-print(result)
-```
-| address                      | lat       | lon       | status  |
-|------------------------------|-----------|-----------|---------|
-| 서울특별시 중구 세종대로 110 | 37.56635  | 126.9779  | success |
+library(vworldGeocode)
 
----------------------------------------------
-### 여러개의 주소를 지오코딩하는 경우 
+api_key <- Sys.getenv("VWORLD_GEOCODING2")  # .Renviron 등에 저장
+
+df <- data.frame(도로명 = c("서울특별시 중구 세종대로 110"))
+res <- vworld_geocode(df$도로명, api_key = api_key, type = "ROAD",
+                      col_name = "address", progress_label = "demo")
+print(res)
+```
+
+## 환경변수 예시 
 ```r
-addr_list <- c(
-  "서울특별시 중구 세종대로 110",
-  "부산광역시 해운대구 센텀서로 30",
-  "광주광역시 동구 금남로 1"
-)
-results <- batch_geocode(
-  addresses = addr_list,
-  api_key 
-)
-print(results)
+VWORLD_GEOCODING2=...your-key...
 ```
 
-| address                      | lat       | lon       | status  |
-|------------------------------|-----------|-----------|---------|
-| 서울특별시 중구 세종대로 110 | 37.56635  | 126.9779  | success |
-| 부산광역시 해운대구 센텀서로 30 | 35.17087  | 129.1303  | success |
-| 광주광역시 동구 금남로 1     | 35.15038  | 126.9181  | success |
 
----------------------------------------------
-참고 및 유의사항
+## LICENSE
 
-  - 반드시 본인의 VWorld API Key를 입력해야 합니다.
-  - Vworld의 지오코딩 지원정보는 https://www.vworld.kr/dev/v4dv_geocoderguide2_s001.do 를 참고하시기 바랍니다 
-  - 대량 요청 시 VWorld API의 일일/분당 제한에 유의하세요.
-  - 주소 오타, 비표준 표기 시 변환 실패 가능성이 있습니다.
+MIT License
 
----------------------------------------------
+Copyright (c) 2025 Your Name
 
-문의 및 이슈
-	• 버그, 요청, 사용 문의 등은 derickspark@gmail.com 으로 연락 주세요.
-
+Permission is hereby granted, free of charge, to any person obtaining a copy
