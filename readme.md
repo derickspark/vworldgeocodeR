@@ -5,7 +5,7 @@
 ## 설치
 ```r
 # 개발 버전
-# remotes::install_github("your-id/vworldGeocode")
+# remotes::install_github("derickspark/vworldgeocodeR")
 ```
 
 ## 사용 예시 
