@@ -12,7 +12,7 @@
 ```r
 library(vworldGeocode)
 
-api_key <- Sys.getenv("VWORLD_GEOCODING2")  # .Renviron 등에 저장
+api_key <- "VWORLD_GEOCODING2"  # Vworld에서 발급받아 사용 
 
 df <- data.frame(도로명 = c("서울특별시 중구 세종대로 110"))
 res <- vworld_geocode(df$도로명, api_key = api_key, type = "ROAD",
