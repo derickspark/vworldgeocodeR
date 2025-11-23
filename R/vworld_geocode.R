@@ -71,7 +71,7 @@ vworld_geocode <- function(address_vec, api_key,
   geocode_one <- function(a) {
     if (is.na(a) || !nzchar(trimws(a))) return(c(lat = NA_real_, lon = NA_real_))
 
-    url <- modify_url(
+    url <- httr::modify_url(
       "https://api.vworld.kr/req/address",
       query = list(
         service = "address",
@@ -87,15 +87,15 @@ vworld_geocode <- function(address_vec, api_key,
       )
     )
 
-    resp <- try(GET(url,
-                    timeout(timeout_sec),
-                    user_agent("vworldgeocodeR/mini")))
-    if (inherits(resp, "try-error") || http_error(resp)) {
+    resp <- try(httr::GET(url,
+                          httr::timeout(timeout_sec),
+                          httr::user_agent("vworldgeocodeR/mini")))
+    if (inherits(resp, "try-error") || httr::http_error(resp)) {
       return(c(lat = NA_real_, lon = NA_real_))
     }
 
-    txt <- content(resp, "text", encoding = "UTF-8")
-    out <- suppressWarnings(fromJSON(txt, simplifyVector = FALSE))
+    txt <- httr::content(resp, "text", encoding = "UTF-8")
+    out <- suppressWarnings(jsonlite::fromJSON(txt, simplifyVector = FALSE))
 
     if (verbose) {
       st <- tryCatch(out$response$status, error = function(e) NA_character_)
