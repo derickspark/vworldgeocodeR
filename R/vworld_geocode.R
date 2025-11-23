@@ -1,11 +1,3 @@
-#' 단일 주소를 VWorld API로 지오코딩
-#'
-#' @param address 주소(문자열)
-#' @param api_key VWorld API 키
-#' @param parcel 논리값, 지번 주소 사용 여부 (기본값 TRUE)
-#' @param road 논리값, 도로명 주소 사용 여부 (기본값 FALSE)
-#' @return 데이터프레임(address, lat, lon, status)
-#' @export
 vworld_geocode <- function(address_vec, api_key,
                            type = c("PARCEL", "ROAD"),
                            col_name = "address",
