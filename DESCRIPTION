@@ -2,7 +2,7 @@ Package: vworldgeocodeR
 Title: Simple Geocoding Wrapper for vworld.kr
 Version: 0.1.0
 Authors@R: c(
-    person("Derick Park", email = "dsmp2640@gmail.com", role = c("aut", "cre"))
+    person("Your", "Name", email = "you@example.com", role = c("aut", "cre"))
 )
 Description: Thin wrapper around vworld.kr address API to geocode parcel/road addresses with progress and ETA display.
 License: MIT + file LICENSE
