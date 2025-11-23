@@ -1,17 +1,19 @@
-Package: vworldgeocodeR
-Type: Package
-Title: Simple VWorld Geocoding Utilities
+Package: vworldGeocode
+Title: Simple Geocoding Wrapper for vworld.kr
 Version: 0.1.0
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: Provides functions to geocode Korean addresses using the VWorld API, including batch geocoding with progress bar.
-Depends: R (>= 3.5.0)
-Imports:
-    RCurl,
-    httr,
-    jsonlite,
-    progress
-License: MIT
+Authors@R: c(
+    person("Your", "Name", email = "you@example.com", role = c("aut", "cre"))
+)
+Description: Thin wrapper around vworld.kr address API to geocode parcel/road addresses with progress and ETA display.
+License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
-LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 3.5.0)
+Imports:
+    httr,
+    jsonlite
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
